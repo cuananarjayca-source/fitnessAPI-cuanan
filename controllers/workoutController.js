@@ -25,7 +25,7 @@ exports.addWorkout = async (req, res) => {
 // @access  Private
 exports.getMyWorkouts = async (req, res) => {
   try {
-    const workouts = await Workout.find({ userId: req.user.id });
+    const workouts = await Workout.find({ userId: req.user._id });
     return res.status(200).json({
       workouts: workouts
     });
@@ -105,11 +105,16 @@ exports.completeWorkoutStatus = async (req, res) => {
       workout.status = 'completed';
 
       const updatedWorkout = await workout.save();
-      res.status(200).json(updatedWorkout);
+
+      return res.status(200).json({
+        message: 'Workout status updated successfully',
+        updatedWorkout: updatedWorkout
+      });
     } else {
-      res.status(404).json({ message: 'Workout not found' });
+      return res.status(404).json({ message: 'Workout not found' });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Server Error', error: error.message });
+    return res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
+

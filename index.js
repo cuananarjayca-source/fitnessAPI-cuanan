@@ -3,8 +3,8 @@ const express = require('express');
 const cors = require('cors'); // 1. Import CORS
 const connectDB = require('./config/db');
 
-const authRoutes = require('./routes/authRoutes');
-const workoutRoutes = require('./routes/workoutRoutes');
+const userRoutes = require('./routes/user');
+const workoutRoutes = require('./routes/workout');
 
 // Connect to Database
 connectDB();
@@ -19,7 +19,7 @@ app.use(express.json()); // Parse JSON bodies
 
 
 // Mount routes here
-app.use('/users', authRoutes);
+app.use('/users', userRoutes);
 app.use('/workouts', workoutRoutes);
 
 // Basic health check route

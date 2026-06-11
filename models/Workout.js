@@ -11,7 +11,7 @@ const workoutSchema = new mongoose.Schema({
     required: [true, 'Please add a workout name'],
   },
   duration: {
-    type: String, // Or Number if it's in minutes
+    type: String, 
     required: [true, 'Please add a duration'],
   },
   status: {
